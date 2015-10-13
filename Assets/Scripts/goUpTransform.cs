@@ -7,6 +7,8 @@ public class goUpTransform : MonoBehaviour
 	public float bpm = 0.6f;
 	public float bpmMax = 0.4f;
 	public float bpmMin = 0.8f;
+    public float speed;
+    public float fallingSpeed;
 
 	public Vector3 lowV;
 	public Vector3 highV;
@@ -15,8 +17,8 @@ public class goUpTransform : MonoBehaviour
 
     int currentBMP = 1;
 	float tempTime = 0.0f;
-	// Use this for initialization
-	void Start ()
+    // Use this for initialization
+    void Start ()
     {
 
 	}
@@ -24,13 +26,22 @@ public class goUpTransform : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
+        float dTime = Time.deltaTime;
         tempTime += Time.deltaTime;
         if (Input.GetKeyDown("space"))
         {
             BPMCheck();
             VectorChange();
             PositionSet();   
-        }   
+        }
+        else if (tempTime >= 2.0f)
+        {
+            if (transform.localPosition.y > -2.0f)
+            {
+                transform.Translate(new Vector3(0.0f, -fallingSpeed * dTime , 0.0f));
+                gameObject.GetComponent<Renderer>().material.color = Color.red;
+            }
+        }
 	}
 
     // check the BPM and sets the current BMP value
@@ -53,6 +64,7 @@ public class goUpTransform : MonoBehaviour
     // Determens if the vector needs to be chagned
     void VectorChange ()
     {
+        float dTime = Time.deltaTime;
         if (currentBMP == 1)
         {
             if (transform.localPosition.y == 2.0f)
@@ -61,10 +73,9 @@ public class goUpTransform : MonoBehaviour
             }
             else
             {
-                highV = new Vector3(0.0f, 0.2f, 0.0f);
+                highV = new Vector3(0.0f, speed * dTime , 0.0f);
             }
         }
-
         if (currentBMP == -1)
         {
                 if (transform.localPosition.y == -2.0f)
@@ -73,7 +84,7 @@ public class goUpTransform : MonoBehaviour
                 }
                 else
                 {
-                    lowV = new Vector3(0.0f, -0.2f, 0.0f);
+                    lowV = new Vector3(0.0f, -speed * dTime, 0.0f);
                 }
         }
  
@@ -81,11 +92,11 @@ public class goUpTransform : MonoBehaviour
         {
            if( transform.localPosition.y < 0.0f)
                 {
-                    normalV = new Vector3(0.0f, 0.2f, 0.0f);
+                    normalV = new Vector3(0.0f, speed * dTime, 0.0f);
                 }
            if (transform.localPosition.y > 0.0f)
                 {
-                    normalV = new Vector3(0.0f, -0.2f, 0.0f);
+                    normalV = new Vector3(0.0f, -speed * dTime, 0.0f);
                 }
            if (transform.localPosition.y > -0.1f && transform.localPosition.y < 0.1f)
                 {
