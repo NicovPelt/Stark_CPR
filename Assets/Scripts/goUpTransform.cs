@@ -19,6 +19,8 @@ public class goUpTransform : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
+        PositionChange();
+
 		tempTime += Time.deltaTime;
 		if (Input.GetKeyDown ("space"))
 		{
@@ -26,21 +28,28 @@ public class goUpTransform : MonoBehaviour {
 			if (tempTime >= bpmMin)
 			{
 				transform.position = lowV;
-				//dynamic cubeColor = gameObject.GetComponent<Shader>();
-
-
+                gameObject.GetComponent<Renderer>().material.color = Color.red;
+                
 			}
 			else if (tempTime <= bpmMax)
 			{
 				transform.position = highV;
+                gameObject.GetComponent<Renderer>().material.color = Color.red;
+
 			}
 			else
 			{
 				transform.position = (new Vector3 (0.0f, 0.0f, 0.0f));
+                gameObject.GetComponent<Renderer>().material.color = Color.green;
 			}
 			tempTime = 0.0f;
 		}
 
 
 	}
+
+    void PositionChange ()
+    {
+
+    }
 }
