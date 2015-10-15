@@ -15,7 +15,7 @@ public class goUpTransform : MonoBehaviour
     public Vector3 normalV;
 
 
-    int currentBMP = 1;
+    int currentBMP = 0;
 	float tempTime = 0.0f;
     // Use this for initialization
     void Start ()
@@ -28,6 +28,21 @@ public class goUpTransform : MonoBehaviour
     {
         float dTime = Time.deltaTime;
         tempTime += Time.deltaTime;
+        if ((currentBMP == 0) && (tempTime < 0.6f))
+        {
+            VectorChange();
+            PositionSet();
+        }
+        if ((currentBMP == -1) && (tempTime > 0.6f))
+        {
+            VectorChange();
+            PositionSet();
+        }
+        if ((currentBMP == 1) && (tempTime < 0.6f))
+        {
+            VectorChange();
+            PositionSet();
+        }
         if (Input.GetKeyDown("space"))
         {
             BPMCheck();
@@ -44,6 +59,7 @@ public class goUpTransform : MonoBehaviour
         }
 	}
 
+    // IEnumerator 
     // check the BPM and sets the current BMP value
     void BPMCheck()
     {
