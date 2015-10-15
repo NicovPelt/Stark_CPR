@@ -49,7 +49,7 @@ public class goUpTransform : MonoBehaviour
             VectorChange();
             PositionSet();   
         }
-        else if (tempTime >= 2.0f)
+        else if (tempTime >= 1.2f)
         {
             if (transform.localPosition.y > -2.0f)
             {
@@ -83,7 +83,7 @@ public class goUpTransform : MonoBehaviour
         float dTime = Time.deltaTime;
         if (currentBMP == 1)
         {
-            if (transform.localPosition.y == 2.0f)
+            if (transform.localPosition.y >= 2.0f)
             {
                 highV = new Vector3(0.0f, 0.0f, 0.0f);
             }
@@ -94,7 +94,7 @@ public class goUpTransform : MonoBehaviour
         }
         if (currentBMP == -1)
         {
-                if (transform.localPosition.y == -2.0f)
+                if (transform.localPosition.y <= -2.0f)
                 {
                     lowV = new Vector3(0.0f, 0.0f, 0.0f);
                 }
