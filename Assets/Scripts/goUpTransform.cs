@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class goUpTransform : MonoBehaviour
@@ -9,6 +10,7 @@ public class goUpTransform : MonoBehaviour
 	public float bpmMin = 0.8f;
     public float speed;
     public float fallingSpeed;
+    public string tempText;
 
 	public Vector3 lowV;
 	public Vector3 highV;
@@ -51,6 +53,7 @@ public class goUpTransform : MonoBehaviour
         }
         else if (tempTime >= 1.2f)
         {
+            GetComponentInChildren<uiActor>().missedH++;
             if (transform.localPosition.y > -2.0f)
             {
                 transform.Translate(new Vector3(0.0f, -fallingSpeed * dTime , 0.0f));
@@ -66,14 +69,17 @@ public class goUpTransform : MonoBehaviour
         if (tempTime >= bpmMin)
         {
             currentBMP = -1;
+            
         }
          else if (tempTime <= bpmMax)
         {
             currentBMP = 1;
+           
         }
         else
         {
             currentBMP = 0;
+            
         }
         tempTime = 0.0f;
     }
@@ -83,7 +89,7 @@ public class goUpTransform : MonoBehaviour
         float dTime = Time.deltaTime;
         if (currentBMP == 1)
         {
-            if (transform.localPosition.y == 2.0f)
+            if (transform.localPosition.y >= 2.0f)
             {
                 highV = new Vector3(0.0f, 0.0f, 0.0f);
             }
@@ -94,7 +100,7 @@ public class goUpTransform : MonoBehaviour
         }
         if (currentBMP == -1)
         {
-                if (transform.localPosition.y == -2.0f)
+                if (transform.localPosition.y <= -2.0f)
                 {
                     lowV = new Vector3(0.0f, 0.0f, 0.0f);
                 }
@@ -127,16 +133,19 @@ public class goUpTransform : MonoBehaviour
         {
             transform.Translate(lowV);
             gameObject.GetComponent<Renderer>().material.color = Color.red;
+            GetComponentInChildren<uiActor>().missedH++;
         }
         if (currentBMP == 1)
         {
             transform.Translate(highV);
             gameObject.GetComponent<Renderer>().material.color = Color.red;
+            GetComponentInChildren<uiActor>().incorrectH++;
         }
         if (currentBMP == 0)
         {
             transform.Translate(normalV);
             gameObject.GetComponent<Renderer>().material.color = Color.green;
+            GetComponentInChildren<uiActor>().correctH++;
         }
 
     }
