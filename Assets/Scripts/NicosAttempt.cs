@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class NicosAttempt : MonoBehaviour {
+public class NicosAttempt : MonoBehaviour 
+{
 
 	private bool firstTime = true;
 	private float timeLastPress = 0f;
@@ -13,25 +14,35 @@ public class NicosAttempt : MonoBehaviour {
 	private float journeyLength = 0f;
 
 	// Use this for initialization
-	void Start () {
+	void Start () 
+	{
 	
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update () 
+	{
 	
-		if (Input.GetKeyDown ("space")) {
-			if(firstTime){
+		if (Input.GetKeyDown ("space")) 
+		{
+			if(firstTime)
+			{
 				firstTime = false;
 				timeLastPress = Time.time;
-			} else {
+			} 
+			else 
+			{
 				startTime = Time.time;
 				//float tempTime = Time.time;
-				if((startTime - timeLastPress) <= 0.1f){
+				if((startTime - timeLastPress) <= 0.1f)
+				{
 					//set target pos to 2 
 					targetYPos = new Vector3(0f, 2f, 0f);
 					//Tween to top in 0.6 sec
-				} else if ((startTime - timeLastPress) < 1.1f){
+					uiOutPut();
+				}
+				else if ((startTime - timeLastPress) < 1.1f)
+				{
 					//calc pos between -2 and 2
 					//formula: targetpos = ((10/3*2)*tempTime-timeLastPress)+4
 					//Debug.Log(startTime);
@@ -40,10 +51,14 @@ public class NicosAttempt : MonoBehaviour {
 					//targetYPos = new Vector3(0f, ((-(10f/3f*2f))*(startTime-timeLastPress))+4, 0f);
 					targetYPos = new Vector3(0f, (-4f*(startTime-timeLastPress)+2.4f), 0f);
 					//tween to pos in 0.6 sec
-				} else {
+					uiOutPut();
+				}
+				else 
+				{
 					//set targetpos to -2
 					targetYPos = new Vector3(0f, -2f, 0f);;
 					//tween to bottom in 0.6 sec
+					uiOutPut();
 				}
 				PosOnPress = transform.position;
 				journeyLength = Vector3.Distance(PosOnPress, targetYPos);
@@ -54,7 +69,8 @@ public class NicosAttempt : MonoBehaviour {
 
 	}
 
-	void moveToTarget(){
+	void moveToTarget()
+	{
 		float distCovered = (Time.time - startTime) * speed;
 		float fracJourney = distCovered / journeyLength;
 		//Debug.Log (PosOnPress);
@@ -62,4 +78,29 @@ public class NicosAttempt : MonoBehaviour {
 		//Debug.Log (fracJourney);
 		transform.position = Vector3.Lerp(PosOnPress, targetYPos, fracJourney);
 	}
+
+	void uiOutPut ()
+	{
+		if (targetYPos.y > 0.2) 
+		{
+		gameObject.GetComponent<Renderer>().material.color = Color.red;
+		GetComponentInChildren<uiActor>().incorrectH++;
+		} 
+		else if (targetYPos.y < -0.2) 
+		{
+		gameObject.GetComponent<Renderer>().material.color = Color.red;
+		GetComponentInChildren<uiActor>().missedH++;
+		} 
+		else 
+		{
+		gameObject.GetComponent<Renderer>().material.color = Color.green;
+		GetComponentInChildren<uiActor>().correctH++;
+		}
+
+	}
+
+	
+
 }
+
+
