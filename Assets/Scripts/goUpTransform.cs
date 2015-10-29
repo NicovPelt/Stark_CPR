@@ -49,7 +49,7 @@ public class goUpTransform : MonoBehaviour
             VectorChange();
             PositionSet();   
         }
-        else if (tempTime >= 2.0f)
+        else if (tempTime >= 1.2f)
         {
             if (transform.localPosition.y > -2.0f)
             {
