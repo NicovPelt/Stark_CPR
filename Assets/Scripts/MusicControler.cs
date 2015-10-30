@@ -3,7 +3,12 @@ using System.Collections;
 
 public class MusicControler : MonoBehaviour {
 
-	private int score = 0;
+    public int correctOF16 = 11;
+    private int score = 0;
+    private int correctB = 0;
+    private int incorrectB = 0;
+    private float lastTime = 0.0f;
+
 	private bool track1On = true;
 	private bool track2On = false;
 	private bool track3On = false;
@@ -27,62 +32,105 @@ public class MusicControler : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (track1On && track1.volume < 1f) {
-			track1.volume += 0.0005f;
-		} else if (!track1On && track1.volume > 0) {
-			track1.volume -= 0.0005f;
-		}
-		if (track2On && track2.volume < 1f) {
-			track2.volume += 0.0005f;
-		} else if (!track2On && track2.volume > 0) {
-			track2.volume -= 0.0005f;
-		}
-		if (track3On && track3.volume < 1f) {
-			track3.volume += 0.0005f;
-		} else if (!track3On && track3.volume > 0) {
-			track3.volume -= 0.0005f;
-		}
-		if (track4On && track4.volume < 1f) {
-			track4.volume += 0.0005f;
-		} else if (!track4On && track4.volume > 0) {
-			track4.volume -= 0.0005f;
-		}
-		if (track5On && track5.volume < 1f) {
-			track5.volume += 0.0005f;
-		} else if (!track5On && track5.volume > 0) {
-			track5.volume -= 0.0005f;
-		}
+        if ((incorrectB + correctB >= 16) && ((Time.time - lastTime) >= 9.1f ))
+        {
+            scoreCal();
+            lastTime = Time.time;
+            Debug.Log(" Music chagne");
+        }
+        musicControll();
 	}
 
+    private void scoreCal()
+    {
+        if (correctB >= correctOF16)
+        {
+            score++;
+        }
+        if (incorrectB > 16-correctOF16)
+        {
+            score =-1;
+        }
+        if (score > 0)
+        {
+            if (score == 1)
+                track2On = false;
+            else if (score == 2)
+                track3On = false;
+            else if (score == 3)
+                track4On = false;
+            else if (score == 4)
+                track5On = false;
+            else if (score == 5)
+                track1On = true;
+        }
+        if (score < 6)
+        {
+            if (score == 1)
+                track2On = true;
+            else if (score == 2)
+                track3On = true;
+            else if (score == 3)
+                track4On = true;
+            else if (score == 4)
+                track5On = true;
+            else if (score == 5)
+                track1On = false;
+        }
+        correctB = 0;
+        incorrectB = 0;
+    }
+
 	public void correct(){
-		if (score < 70) {
-			score ++;
-			if(score == 16)
-				track2On = true;
-			else if(score == 32)
-				track3On = true;
-			else if(score == 48)
-				track4On = true;
-			else if(score == 64)
-				track5On = true;
-			else if(score == 68)
-				track1On = false;
-		}
+        correctB++;   
 	}
 
 	public void wrong(){
-		if (score > 0) {
-			score -= 2;
-			if(score == 12)
-				track2On = false;
-			else if(score == 28)
-				track3On = false;
-			else if(score == 44)
-				track4On = false;
-			else if(score == 60)
-				track5On = false;
-			else if(score == 64)
-				track1On = true;
-		}
+        incorrectB++;   
 	}
+
+    public void musicControll()
+    {
+        if (track1On && track1.volume < 1f)
+        {
+            track1.volume += 0.0005f;
+        }
+        else if (!track1On && track1.volume > 0)
+        {
+            track1.volume -= 0.0005f;
+        }
+        if (track2On && track2.volume < 1f)
+        {
+            track2.volume += 0.0005f;
+        }
+        else if (!track2On && track2.volume > 0)
+        {
+            track2.volume -= 0.0005f;
+        }
+        if (track3On && track3.volume < 1f)
+        {
+            track3.volume += 0.0005f;
+        }
+        else if (!track3On && track3.volume > 0)
+        {
+            track3.volume -= 0.0005f;
+        }
+        if (track4On && track4.volume < 1f)
+        {
+            track4.volume += 0.0005f;
+        }
+        else if (!track4On && track4.volume > 0)
+        {
+            track4.volume -= 0.0005f;
+        }
+        if (track5On && track5.volume < 1f)
+        {
+            track5.volume += 0.0005f;
+        }
+        else if (!track5On && track5.volume > 0)
+        {
+            track5.volume -= 0.0005f;
+        }
+    }
+
 }

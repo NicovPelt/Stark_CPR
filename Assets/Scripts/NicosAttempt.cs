@@ -3,8 +3,8 @@ using System.Collections;
 
 public class NicosAttempt : MonoBehaviour 
 {
-
-	private bool firstTime = true;
+    private bool falling = false;
+    private bool firstTime = true;
 	private float timeLastPress = 0f;
 	private MusicControler music;
 
@@ -12,7 +12,10 @@ public class NicosAttempt : MonoBehaviour
 	private Vector3 targetYPos = new Vector3(0f,0f,0f);
 	private float startTime = 0f;
 	public float speed = 3f;
+    public float Upperlimit = 0.3f;
+    public float lowerLimit = -0.3f;
 	private float journeyLength = 0f;
+   
 
 	// Use this for initialization
 	void Start () 
@@ -43,7 +46,6 @@ public class NicosAttempt : MonoBehaviour
 					//set target pos to 2 
 					targetYPos = new Vector3(0f, 2f, 0f);
 					//Tween to top in 0.6 sec
-					uiOutPut();
 				}
 				else if ((startTime - timeLastPress) < 1.1f)
 				{
@@ -55,23 +57,35 @@ public class NicosAttempt : MonoBehaviour
 					//targetYPos = new Vector3(0f, ((-(10f/3f*2f))*(startTime-timeLastPress))+4, 0f);
 					targetYPos = new Vector3(0f, (-4f*(startTime-timeLastPress)+2.4f), 0f);
 					//tween to pos in 0.6 sec
-					uiOutPut();
 				}
 				else 
 				{
 					//set targetpos to -2
-					targetYPos = new Vector3(0f, -2f, 0f);;
+					targetYPos = new Vector3(0f, -2f, 0f);
 					//tween to bottom in 0.6 sec
-					uiOutPut();
 				}
 				PosOnPress = transform.position;
 				journeyLength = Vector3.Distance(PosOnPress, targetYPos);
 				timeLastPress = Time.time;
+                uiOutPut();
 			}
 		}
-		moveToTarget ();
-
-	}
+        if ((Time.time - timeLastPress >= 1.2f) && !(Input.GetKeyDown("space"))  && falling == false)
+        {
+            falling = true;
+            startTime = Time.time;
+            targetYPos = new Vector3(0f, -2f, 0f);
+            PosOnPress = transform.position;
+            journeyLength = Vector3.Distance(PosOnPress, targetYPos);
+            Debug.Log(" more then 1.2 sec");
+            uiOutPut();
+        }
+        if (targetYPos.y != -2f)
+        {
+            falling = false;
+        }
+        moveToTarget();
+    }
 
 	void moveToTarget()
 	{
@@ -85,13 +99,14 @@ public class NicosAttempt : MonoBehaviour
 
 	void uiOutPut ()
 	{
-		if (targetYPos.y > 0.2) 
+		if (targetYPos.y > Upperlimit) 
 		{
 			gameObject.GetComponent<Renderer>().material.color = Color.red;
 			GetComponentInChildren<uiActor>().incorrectH++;
+            music.wrong();
 
 		} 
-		else if (targetYPos.y < -0.2) 
+		else if (targetYPos.y < lowerLimit) 
 		{
 			gameObject.GetComponent<Renderer>().material.color = Color.red;
 			GetComponentInChildren<uiActor>().missedH++;
