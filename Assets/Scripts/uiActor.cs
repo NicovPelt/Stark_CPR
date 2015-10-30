@@ -5,8 +5,8 @@ using System.Collections;
 
 public class uiActor : MonoBehaviour {
     public int correctH = 0;
-    public int incorrectH = 0;
-    public int missedH = 0;
+	public int incorrectH = 0;
+	public int missedH = 0;
 
     public Text correctHT;
     public Text incorrectHT;

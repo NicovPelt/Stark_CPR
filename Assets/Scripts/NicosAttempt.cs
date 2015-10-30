@@ -6,6 +6,7 @@ public class NicosAttempt : MonoBehaviour
 
 	private bool firstTime = true;
 	private float timeLastPress = 0f;
+	private MusicControler music;
 
 	private Vector3 PosOnPress = new Vector3(0f,0f,0f);
 	private Vector3 targetYPos = new Vector3(0f,0f,0f);
@@ -16,13 +17,16 @@ public class NicosAttempt : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
-	
+		music = GameObject.Find ("Audio Sources").GetComponent<MusicControler>();
+
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
-	
+		//if (music == null)
+			//Debug.Log (GameObject.Find ("Audio Sources"));
+			
 		if (Input.GetKeyDown ("space")) 
 		{
 			if(firstTime)
@@ -83,23 +87,24 @@ public class NicosAttempt : MonoBehaviour
 	{
 		if (targetYPos.y > 0.2) 
 		{
-		gameObject.GetComponent<Renderer>().material.color = Color.red;
-		GetComponentInChildren<uiActor>().incorrectH++;
+			gameObject.GetComponent<Renderer>().material.color = Color.red;
+			GetComponentInChildren<uiActor>().incorrectH++;
+
 		} 
 		else if (targetYPos.y < -0.2) 
 		{
-		gameObject.GetComponent<Renderer>().material.color = Color.red;
-		GetComponentInChildren<uiActor>().missedH++;
+			gameObject.GetComponent<Renderer>().material.color = Color.red;
+			GetComponentInChildren<uiActor>().missedH++;
+			music.wrong();
 		} 
 		else 
 		{
-		gameObject.GetComponent<Renderer>().material.color = Color.green;
-		GetComponentInChildren<uiActor>().correctH++;
+			gameObject.GetComponent<Renderer>().material.color = Color.green;
+			GetComponentInChildren<uiActor>().correctH++;
+			music.correct();
 		}
 
 	}
-
-	
 
 }
 
