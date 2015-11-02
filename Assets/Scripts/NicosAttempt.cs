@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.IO.Ports;
+
 
 public class NicosAttempt : MonoBehaviour 
 {
@@ -15,22 +17,36 @@ public class NicosAttempt : MonoBehaviour
     public float Upperlimit = 0.3f;
     public float lowerLimit = -0.3f;
 	private float journeyLength = 0f;
-   
+
+    SerialPort sp = new SerialPort("COM3",9600);
+    private int spReadout = 0;
 
 	// Use this for initialization
 	void Start () 
 	{
 		music = GameObject.Find ("Audio Sources").GetComponent<MusicControler>();
-
+        sp.Open();
+        sp.ReadTimeout = 1;
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
+        if (sp.IsOpen)
+            try
+            {
+                // spReadout = 3;
+                //spReadout = sp.ReadByte();
+                Debug.Log(sp.ReadByte());
+            }
+            catch (System.Exception)
+            {
+
+            }
 		//if (music == null)
 			//Debug.Log (GameObject.Find ("Audio Sources"));
 			
-		if (Input.GetKeyDown ("space")) 
+		if (Input.GetKeyDown ("space") || sp.ReadByte() == 2) 
 		{
 			if(firstTime)
 			{
