@@ -3,31 +3,37 @@ using System.Collections;
 
 public class playerIsKill : MonoBehaviour {
 
-
-
-	// Use this for initialization
-
 	public GameObject player;
+	bool collided;
 	
 	void Start () 
 	{
-		StartCoroutine(StartDatShit());
+		//StartCoroutine(StartDatShit());
 	}
 
 	void OnTriggerEnter (Collider other)
 	{
-
-		Debug.Log ("Shrekked");
-		StartDatShit ();
+		Debug.Log ("Dedded");
 		Destroy (player);
+	
+		Application.LoadLevel ("Level1");
+
 	}
 
-	IEnumerator StartDatShit() 
-	{
-
-		yield return new WaitForSeconds(5);	
-		Application.LoadLevel("Level1");
-	}
+//	IEnumerator StartDatShit() 
+//	{
+//		if (collided = true) {
+//			yield return new WaitForSeconds (5);
+//			collided = false;
+//			Application.LoadLevel ("Level1");
+//
+//		}
+//		else 
+//		{
+//			yield return new WaitForSeconds (1);
+//		}
+//
+//	}
 
 	
 	// Update is called once per frame
