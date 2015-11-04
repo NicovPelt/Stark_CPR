@@ -13,7 +13,12 @@ public class uiActor : MonoBehaviour {
     public Text missedHT;
     public Text Press;
 
-    float startTime;
+    private float startTime;
+    private float Holdtime;
+    private int Hold;
+    private int i;
+    private int o;
+    private bool HoldB;
 
 
     // Use this for initialization
@@ -28,22 +33,33 @@ public class uiActor : MonoBehaviour {
         incorrectHT.text = "Faulty Beats: " + incorrectH;
         missedHT.text = "Missed Beats: " + missedH;
 
-        if ((Time.time - startTime) >= 5.0f)
+        if ((Time.time - startTime) >= 2.0f)
         {
             Press.text = "";
-            Debug.Log("STOP");
             startTime = Time.time;
         }
     }
 
-    public void pressEnable()
+    public void pressEnable(int i)
     {
-        Debug.Log(" called");
-        if (Press.text == "")
+        if (i == 1 && HoldB == false)
+        {
+            Hold = i;
+            Holdtime = Time.time;
+            Debug.Log(Hold);
+            HoldB = true;
+        }
+
+        if (i == 2)
+        {
+            HoldB = false;
+        }
+        
+        if (HoldB == true && Press.text == "" && i == 1 && Hold == 1 && (Time.time - 0.6f) >= Holdtime)
         {
             Press.text = "Press Harder!!!";
             startTime = Time.time;
-            Debug.Log("Text enabled ");
+            HoldB = false;
         }
         
     }

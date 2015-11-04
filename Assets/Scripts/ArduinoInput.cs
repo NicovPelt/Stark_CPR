@@ -27,20 +27,20 @@ public class ArduinoInput : MonoBehaviour {
             catch
             {
                 Debug.Log("Try failed");
+                spReadout = 0;
             }
         else
+        {
             Debug.Log("Sp closed");
+        }
+
+        GetComponentInChildren<uiActor>().pressEnable(spReadout);
 
         if (spReadout != OldReadout)
         {
-            if (spReadout == 1)
-            {
-                Debug.Log("stuff");
-                GetComponentInChildren<uiActor>().pressEnable();
-            }
+            // GetComponentInChildren<uiActor>().pressEnable(spReadout,OldReadout);
             GetComponent<NicosAttempt>().spInput = spReadout;
-            OldReadout = spReadout;
-            
+            OldReadout = spReadout;       
         }
         else
         {
