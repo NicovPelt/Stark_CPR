@@ -3,8 +3,10 @@ using System.Collections;
 
 public class MusicControler : MonoBehaviour {
 
-    public int correctOF16 = 12;
-    private int score = 0;
+
+ 	public int correctOF16 = 11;
+    private int score = 1;
+
     private int correctB = 0;
     private int incorrectB = 0;
     private float lastTime = 0.0f;
@@ -46,10 +48,25 @@ public class MusicControler : MonoBehaviour {
         if (correctB >= correctOF16)
         {
             score++;
+            if (score <= 6)
+            {
+                if (score == 2)
+                    track2On = true;
+                else if (score == 3)
+                    track3On = true;
+                else if (score == 4)
+                    track4On = true;
+                else if (score == 5)
+                    track5On = true;
+                else if (score == 6)
+                    track1On = false;
+            }
+         
         }
         if (incorrectB > 16-correctOF16)
         {
             score =-1;
+
         }
         if (score >= 0)
         {
@@ -86,6 +103,21 @@ public class MusicControler : MonoBehaviour {
 			{
 				track1On = false;
 			}
+
+            if (score >= 0)
+            {
+                if (score == 1)
+                    track2On = false;
+                else if (score == 2)
+                    track3On = false;
+                else if (score == 3)
+                    track4On = false;
+                else if (score == 4)
+                    track5On = false;
+                else if (score == 5)
+                    track1On = true;
+            }
+
         }
         correctB = 0;
         incorrectB = 0;
