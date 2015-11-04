@@ -32,7 +32,7 @@ public class MusicControler : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if ((incorrectB + correctB >= 16) && ((Time.time - lastTime) >= 9.1f ))
+        if ((incorrectB + correctB >= 16) && ((Time.time - lastTime) >= 9.1f ) || ((Time.time - lastTime >= 9.1f)))
         {
             scoreCal();
             lastTime = Time.time;
@@ -51,7 +51,7 @@ public class MusicControler : MonoBehaviour {
         {
             score =-1;
         }
-        if (score > 0)
+        if (score >= 0)
         {
             if (score == 1)
                 track2On = false;
@@ -64,7 +64,7 @@ public class MusicControler : MonoBehaviour {
             else if (score == 5)
                 track1On = true;
         }
-        if (score < 6)
+        if (score <= 6)
         {
             if (score == 1)
                 track2On = true;

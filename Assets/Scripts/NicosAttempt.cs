@@ -36,7 +36,7 @@ public class NicosAttempt : MonoBehaviour
             try
             {
                 // spReadout = 3;
-                //spReadout = sp.ReadByte();
+                spReadout = sp.ReadByte();
                 Debug.Log(sp.ReadByte());
             }
             catch (System.Exception)
@@ -46,7 +46,7 @@ public class NicosAttempt : MonoBehaviour
 		//if (music == null)
 			//Debug.Log (GameObject.Find ("Audio Sources"));
 			
-		if (Input.GetKeyDown ("space") || sp.ReadByte() == 2) 
+		if (Input.GetKeyDown ("space") || spReadout == 2) 
 		{
 			if(firstTime)
 			{
