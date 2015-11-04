@@ -23,7 +23,7 @@ public class MusicControler : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		track1 = transform.FindChild("1 ClickTrack105BPM").GetComponent<AudioSource>();
+		track1 = transform.FindChild("1 BPM105Fixed").GetComponent<AudioSource>();
 		track2 = transform.FindChild("2 PianoLow").GetComponent<AudioSource>();
 		track3 = transform.FindChild("3 Strings").GetComponent<AudioSource>();
 		track4 = transform.FindChild("4 Guitar").GetComponent<AudioSource>();
