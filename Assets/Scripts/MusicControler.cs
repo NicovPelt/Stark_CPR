@@ -3,7 +3,7 @@ using System.Collections;
 
 public class MusicControler : MonoBehaviour {
 
-    public int correctOF16 = 11;
+    public int correctOF16 = 12;
     private int score = 0;
     private int correctB = 0;
     private int incorrectB = 0;
@@ -32,11 +32,11 @@ public class MusicControler : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if ((incorrectB + correctB >= 16) && ((Time.time - lastTime) >= 9.1f ) || ((Time.time - lastTime >= 9.1f)))
+		if ((incorrectB + correctB >= 16) && ((Time.time - lastTime) >= 9.142f ) || ((Time.time - lastTime >= 9.142f)))
         {
             scoreCal();
             lastTime = Time.time;
-            Debug.Log(" Music chagne");
+            Debug.Log("Music change");
         }
         musicControll();
 	}
