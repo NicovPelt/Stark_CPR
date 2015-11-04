@@ -66,16 +66,26 @@ public class MusicControler : MonoBehaviour {
         }
         if (score <= 6)
         {
-            if (score == 1)
-                track2On = true;
+			if (score == 1)
+			{
+				track2On = true;
+			}
             else if (score == 2)
-                track3On = true;
+			{
+				track3On = true;
+			}
             else if (score == 3)
-                track4On = true;
+			{
+				track4On = true;
+			}
             else if (score == 4)
-                track5On = true;
+			{
+				track5On = true;
+			}
             else if (score == 5)
-                track1On = false;
+			{
+				track1On = false;
+			}
         }
         correctB = 0;
         incorrectB = 0;
