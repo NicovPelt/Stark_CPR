@@ -33,13 +33,19 @@ public class ArduinoInput : MonoBehaviour {
 
         if (spReadout != OldReadout)
         {
+            if (spReadout == 1)
+            {
+                Debug.Log("stuff");
+                GetComponentInChildren<uiActor>().pressEnable();
+            }
             GetComponent<NicosAttempt>().spInput = spReadout;
             OldReadout = spReadout;
+            
         }
         else
         {
             GetComponent<NicosAttempt>().spInput = 0;
         }
-
+        
     }
 }
