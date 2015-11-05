@@ -66,44 +66,6 @@ public class MusicControler : MonoBehaviour {
         if (incorrectB > 16-correctOF16)
         {
             score =-1;
-
-        }
-        if (score >= 0)
-        {
-            if (score == 1)
-                track2On = false;
-            else if (score == 2)
-                track3On = false;
-            else if (score == 3)
-                track4On = false;
-            else if (score == 4)
-                track5On = false;
-            else if (score == 5)
-                track1On = true;
-        }
-        if (score <= 6)
-        {
-			if (score == 1)
-			{
-				track2On = true;
-			}
-            else if (score == 2)
-			{
-				track3On = true;
-			}
-            else if (score == 3)
-			{
-				track4On = true;
-			}
-            else if (score == 4)
-			{
-				track5On = true;
-			}
-            else if (score == 5)
-			{
-				track1On = false;
-			}
-
             if (score >= 0)
             {
                 if (score == 1)
@@ -116,8 +78,8 @@ public class MusicControler : MonoBehaviour {
                     track5On = false;
                 else if (score == 5)
                     track1On = true;
-            }
 
+            }
         }
         correctB = 0;
         incorrectB = 0;

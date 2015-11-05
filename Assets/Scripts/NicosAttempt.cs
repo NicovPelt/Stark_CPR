@@ -72,7 +72,7 @@ public class NicosAttempt : MonoBehaviour
                 uiOutPut();
 			}
 		}
-        if ((Time.time - timeLastPress >= 1.2f) && !(Input.GetKeyDown("space"))  && falling == false)
+        if ((Time.time - timeLastPress >= 1.2f) && !(Input.GetKeyDown("space"))  && falling == false && firstTime == false)
         {
             falling = true;
             startTime = Time.time;
@@ -120,9 +120,7 @@ public class NicosAttempt : MonoBehaviour
 			GetComponentInChildren<uiActor>().correctH++;
 			music.correct();
 		}
-
-	}
-
+    }
 }
 
 
