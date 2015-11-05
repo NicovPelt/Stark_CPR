@@ -4,39 +4,30 @@ using System.Collections;
 public class playerIsKill : MonoBehaviour {
 
 	public GameObject player;
-	bool collided;
+	int deadScore = 0; 
+
 	
 	void Start () 
 	{
-		//StartCoroutine(StartDatShit());
+
 	}
 
 	void OnTriggerEnter (Collider other)
 	{
-		Debug.Log ("Dedded");
+		if (deadScore < 3) 
+		{
+			Debug.Log ("Dedded");
+			deadScore++;
+		}
+		if (deadScore == 3)
+		{
 		Destroy (player);
-	
 		Application.LoadLevel ("Level1");
+		}
 
 	}
 
-//	IEnumerator StartDatShit() 
-//	{
-//		if (collided = true) {
-//			yield return new WaitForSeconds (5);
-//			collided = false;
-//			Application.LoadLevel ("Level1");
-//
-//		}
-//		else 
-//		{
-//			yield return new WaitForSeconds (1);
-//		}
-//
-//	}
 
-	
-	// Update is called once per frame
 	void Update () 
 	{
 	
