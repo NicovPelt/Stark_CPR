@@ -29,11 +29,15 @@ public class ArduinoInput : MonoBehaviour {
                 Debug.Log("Try failed");
             }
         else
+        {
             Debug.Log("Sp closed");
+        }
+        GetComponentInChildren<uiActor>().pressEnable(spReadout);
 
         if (spReadout != OldReadout)
         {
             GetComponent<NicosAttempt>().spInput = spReadout;
+            
             OldReadout = spReadout;
         }
         else

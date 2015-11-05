@@ -35,7 +35,7 @@ public class uiActor : MonoBehaviour {
         incorrectHT.text = "Faulty Beats: " + incorrectH;
         missedHT.text = "Missed Beats: " + missedH;
 
-        if ((Time.time - startTime) >= 2.0f && vicBool == false)
+        if ((Time.time - startTime) >= 2.0f)
         {
             Press.text = "";
             startTime = Time.time;
@@ -54,6 +54,7 @@ public class uiActor : MonoBehaviour {
 
     public void pressEnable(int i)
     {
+        Debug.Log("press call");
         if (i == 1 && HoldB == false)
         {
             Hold = i;
@@ -72,6 +73,7 @@ public class uiActor : MonoBehaviour {
             Press.text = "Press Harder!!!";
             startTime = Time.time;
             HoldB = false;
+            Debug.Log("HARDER");
         }
         
     }
