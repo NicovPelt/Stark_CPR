@@ -72,7 +72,7 @@ public class NicosAttempt : MonoBehaviour
                 uiOutPut();
 			}
 		}
-        if ((Time.time - timeLastPress >= 1.2f) && !(Input.GetKeyDown("space"))  && falling == false)
+        if ((Time.time - timeLastPress >= 1.2f) && !(Input.GetKeyDown("space"))  && falling == false && firstTime == false)
         {
             falling = true;
             startTime = Time.time;
@@ -96,6 +96,7 @@ public class NicosAttempt : MonoBehaviour
 		//Debug.Log (PosOnPress);
 		//Debug.Log (targetYPos);
 		//Debug.Log (fracJourney);
+        if (firstTime == false)
 		transform.position = Vector3.Lerp(PosOnPress, targetYPos, fracJourney);
 	}
 
@@ -120,9 +121,7 @@ public class NicosAttempt : MonoBehaviour
 			GetComponentInChildren<uiActor>().correctH++;
 			music.correct();
 		}
-
-	}
-
+    }
 }
 
 

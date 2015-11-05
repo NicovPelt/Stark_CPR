@@ -9,13 +9,13 @@ public class WaterNoise : MonoBehaviour {
 	public float scale = 1.0F;
 	private Texture2D noiseTex;
 	private Color[] pix;
-	private Renderer rend;
+	// private Renderer rend;
 
 	void Start() {
-		rend = GetComponent<Renderer>();
+		// rend = GetComponent<Renderer>();
 		noiseTex = new Texture2D(pixWidth, pixHeight);
 		pix = new Color[noiseTex.width * noiseTex.height];
-		rend.material.mainTexture = noiseTex;
+		// rend.material.mainTexture = noiseTex;
 	}
 	void CalcNoise() {
 		float y = 0.0F;
