@@ -102,11 +102,11 @@ public class MusicControler : MonoBehaviour {
     {
         if (track1On && track1.volume < 1f)
         {
-            track1.volume += 0.0005f;
+            track1.volume += 0.005f;
         }
         else if (!track1On && track1.volume > 0)
         {
-            track1.volume -= 0.0005f;
+            track1.volume -= 0.005f;
         }
         if (track2On && track2.volume < 1f)
         {
@@ -114,31 +114,31 @@ public class MusicControler : MonoBehaviour {
         }
         else if (!track2On && track2.volume > 0)
         {
-            track2.volume -= 0.0005f;
+            track2.volume -= 0.005f;
         }
         if (track3On && track3.volume < 1f)
         {
-            track3.volume += 0.0005f;
+            track3.volume += 0.005f;
         }
         else if (!track3On && track3.volume > 0)
         {
-            track3.volume -= 0.0005f;
+            track3.volume -= 0.005f;
         }
         if (track4On && track4.volume < 1f)
         {
-            track4.volume += 0.0005f;
+            track4.volume += 0.005f;
         }
         else if (!track4On && track4.volume > 0)
         {
-            track4.volume -= 0.0005f;
+            track4.volume -= 0.005f;
         }
         if (track5On && track5.volume < 1f)
         {
-            track5.volume += 0.0005f;
+            track5.volume += 0.005f;
         }
         else if (!track5On && track5.volume > 0)
         {
-            track5.volume -= 0.0005f;
+            track5.volume -= 0.005f;
         }
     }
 
