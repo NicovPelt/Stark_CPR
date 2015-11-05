@@ -25,7 +25,7 @@ public class MusicControler : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		track1 = transform.FindChild("1 BPM105").GetComponent<AudioSource>();
+		track1 = transform.FindChild("1 105BPM").GetComponent<AudioSource>();
 		track2 = transform.FindChild("2 PianoLow").GetComponent<AudioSource>();
 		track3 = transform.FindChild("3 Strings").GetComponent<AudioSource>();
 		track4 = transform.FindChild("4 Guitar").GetComponent<AudioSource>();
@@ -45,6 +45,11 @@ public class MusicControler : MonoBehaviour {
 
     private void scoreCal()
     {
+        if (score >= 7)
+        {
+            GetComponent<uiActor>().Victory();
+        }
+
         if (correctB >= correctOF16)
         {
             score++;
@@ -105,7 +110,7 @@ public class MusicControler : MonoBehaviour {
         }
         if (track2On && track2.volume < 1f)
         {
-            track2.volume += 0.0005f;
+            track2.volume += 0.005f;
         }
         else if (!track2On && track2.volume > 0)
         {

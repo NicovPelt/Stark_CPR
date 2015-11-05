@@ -96,6 +96,7 @@ public class NicosAttempt : MonoBehaviour
 		//Debug.Log (PosOnPress);
 		//Debug.Log (targetYPos);
 		//Debug.Log (fracJourney);
+        if (firstTime == false)
 		transform.position = Vector3.Lerp(PosOnPress, targetYPos, fracJourney);
 	}
 

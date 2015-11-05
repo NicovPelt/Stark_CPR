@@ -19,6 +19,7 @@ public class uiActor : MonoBehaviour {
     private int i;
     private int o;
     private bool HoldB;
+    private bool vicBool = false;
 
 
     // Use this for initialization
@@ -26,19 +27,29 @@ public class uiActor : MonoBehaviour {
     {
 
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update()
     {
         correctHT.text = "Correct Beats: " + correctH;
         incorrectHT.text = "Faulty Beats: " + incorrectH;
         missedHT.text = "Missed Beats: " + missedH;
 
-        if ((Time.time - startTime) >= 2.0f)
+        if ((Time.time - startTime) >= 2.0f && vicBool == false)
         {
             Press.text = "";
             startTime = Time.time;
         }
+        if (vicBool)
+        {
+            StartCoroutine(Wait());
+            Application.LoadLevel("Level1");
+        }
+    }
+
+    IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(3);      
     }
 
     public void pressEnable(int i)
@@ -63,5 +74,10 @@ public class uiActor : MonoBehaviour {
             HoldB = false;
         }
         
+    }
+    public void Victory()
+    {
+        vicBool = true;
+        Press.text = "VICTORY";        
     }
 }
