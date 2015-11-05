@@ -3,8 +3,10 @@ using System.Collections;
 
 public class MusicControler : MonoBehaviour {
 
-    public int correctOF16 = 11;
+
+ 	public int correctOF16 = 11;
     private int score = 1;
+
     private int correctB = 0;
     private int incorrectB = 0;
     private float lastTime = 0.0f;
@@ -23,7 +25,7 @@ public class MusicControler : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		track1 = transform.FindChild("1 ClickTrack105BPM").GetComponent<AudioSource>();
+		track1 = transform.FindChild("1 BPM105Fixed").GetComponent<AudioSource>();
 		track2 = transform.FindChild("2 PianoLow").GetComponent<AudioSource>();
 		track3 = transform.FindChild("3 Strings").GetComponent<AudioSource>();
 		track4 = transform.FindChild("4 Guitar").GetComponent<AudioSource>();
@@ -32,11 +34,11 @@ public class MusicControler : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if ((incorrectB + correctB >= 16) && ((Time.time - lastTime) >= 9.1f ) || ((Time.time - lastTime >= 9.1f)))
+		if ((incorrectB + correctB >= 16) && ((Time.time - lastTime) >= 9.142f ) || ((Time.time - lastTime >= 9.142f)))
         {
             scoreCal();
             lastTime = Time.time;
-            Debug.Log(" Music chagne");
+            Debug.Log("Music change");
         }
         musicControll();
 	}
@@ -64,6 +66,44 @@ public class MusicControler : MonoBehaviour {
         if (incorrectB > 16-correctOF16)
         {
             score =-1;
+
+        }
+        if (score >= 0)
+        {
+            if (score == 1)
+                track2On = false;
+            else if (score == 2)
+                track3On = false;
+            else if (score == 3)
+                track4On = false;
+            else if (score == 4)
+                track5On = false;
+            else if (score == 5)
+                track1On = true;
+        }
+        if (score <= 6)
+        {
+			if (score == 1)
+			{
+				track2On = true;
+			}
+            else if (score == 2)
+			{
+				track3On = true;
+			}
+            else if (score == 3)
+			{
+				track4On = true;
+			}
+            else if (score == 4)
+			{
+				track5On = true;
+			}
+            else if (score == 5)
+			{
+				track1On = false;
+			}
+
             if (score >= 0)
             {
                 if (score == 1)
@@ -77,6 +117,7 @@ public class MusicControler : MonoBehaviour {
                 else if (score == 5)
                     track1On = true;
             }
+
         }
         correctB = 0;
         incorrectB = 0;

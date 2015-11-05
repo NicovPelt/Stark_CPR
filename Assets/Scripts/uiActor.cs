@@ -11,19 +11,57 @@ public class uiActor : MonoBehaviour {
     public Text correctHT;
     public Text incorrectHT;
     public Text missedHT;
+    public Text Press;
 
+    private float startTime;
+    private float Holdtime;
+    private int Hold;
+    private int i;
+    private int o;
+    private bool HoldB;
 
 
     // Use this for initialization
-    void Start () {
-	
-	}
+    void Start()
+    {
+
+    }
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
         correctHT.text = "Correct Beats: " + correctH;
         incorrectHT.text = "Faulty Beats: " + incorrectH;
         missedHT.text = "Missed Beats: " + missedH;
+
+        if ((Time.time - startTime) >= 2.0f)
+        {
+            Press.text = "";
+            startTime = Time.time;
+        }
+    }
+
+    public void pressEnable(int i)
+    {
+        if (i == 1 && HoldB == false)
+        {
+            Hold = i;
+            Holdtime = Time.time;
+            Debug.Log(Hold);
+            HoldB = true;
+        }
+
+        if (i == 2)
+        {
+            HoldB = false;
+        }
+        
+        if (HoldB == true && Press.text == "" && i == 1 && Hold == 1 && (Time.time - 0.6f) >= Holdtime)
+        {
+            Press.text = "Press Harder!!!";
+            startTime = Time.time;
+            HoldB = false;
+        }
         
     }
 }
